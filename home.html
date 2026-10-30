@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b1220">
+  <title>Sentinel — Security Toolkit</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+
+  <div class="app">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true">S</div>
+        <div>
+          <div class="brand-name">SENTINEL</div>
+          <div class="brand-caption">Security workspace</div>
+        </div>
+      </div>
+
+      <div>
+        <div class="nav-label">Workspace</div>
+        <nav class="nav" aria-label="Main navigation">
+          <button data-page="dashboard" aria-current="page"><span class="nav-icon">▦</span>Overview</button>
+          <button data-page="password"><span class="nav-icon">⌑</span>Password lab</button>
+          <button data-page="phishing"><span class="nav-icon">◇</span>Phishing scanner</button>
+          <button data-page="twofa"><span class="nav-icon">◈</span>2FA generator</button>
+        </nav>
+      </div>
+
+      <div class="sidebar-bottom">
+        <div class="privacy-card">
+          <strong><span class="dot"></span> Local processing</strong>
+          <p>Your inputs are processed in this browser. This standalone demo does not send them to a server.</p>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+
+    <main class="main">
+      <header class="topbar">
+        <div>
+          <div class="eyebrow">Personal security tools</div>
+          <h1 id="pageTitle">Security overview</h1>
+          <p class="subtitle" id="pageSubtitle">A clear view of the tools that help protect your digital life.</p>
+        </div>
+        <div class="top-actions">
+          <button class="icon-btn" id="themeToggle" type="button" aria-label="Switch colour theme" title="Switch theme">☼</button>
+        </div>
+      </header>
+
+      <!-- Dashboard Section -->
+
+      <section class="content-section active" id="page-dashboard">
+        <div class="welcome">
+          <div>
+            <h2>Your security workspace</h2>
+            <p>Choose a tool to run a quick local check.</p>
+          </div>
+          <span class="status-pill"><span class="dot"></span> Browser tools ready</span>
+        </div>
+
+        <div class="stats">
+          <div class="stat">
+            <div class="stat-icon">⌑</div>
+            <div>
+              <div class="stat-label">Password tools</div>
+              <div class="stat-value">01 available</div>
+            </div>
+          </div>
+
+          <div class="stat">
+            <div class="stat-icon">◇</div>
+            <div>
+              <div class="stat-label">Threat checks</div>
+              <div class="stat-value">Email & links</div>
+            </div>
+          </div>
+
+          <div class="stat">
+            <div class="stat-icon">◈</div>
+            <div>
+              <div class="stat-label">Authenticator</div>
+              <div class="stat-value">TOTP / 30 sec</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="dashboard-grid">
+          <div class="panel">
+            <div class="panel-head">
+              <h3>Security tools</h3>
+              <span>3 utilities</span>
+            </div>
+
+            <div class="tool-list">
+              <button class="tool-link" data-open="password">
+                <span class="tool-symbol">⌑</span>
+                <span><strong>Password lab</strong><small>Review password patterns and create a stronger password.</small></span>
+                <span class="arrow">›</span>
+              </button>
+              <button class="tool-link" data-open="phishing">
+                <span class="tool-symbol">◇</span>
+                <span><strong>Phishing scanner</strong><small>Inspect message text, sender details and suspicious links.</small></span>
+                <span class="arrow">›</span>
+              </button>
+
+              <button class="tool-link" data-open="twofa">
+                <span class="tool-symbol">◈</span>
+                <span><strong>2FA generator</strong><small>Generate and validate time-based one-time passwords.</small></span>
+                <span class="arrow">›</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-head">
+              <h3>Security reminder</h3>
+              <span>Good practice</span>
+            </div>
+
+            <div class="notice">
+              <strong>Pause before you trust a message.</strong>
+              Never share passwords, one-time codes, PINs or banking details through an unexpected email, text or phone call.
+            </div>
+
+            <div style="height:12px"></div>
+            <div class="notice">
+              <strong>Use a unique password for every account.</strong>
+              A password manager and multi-factor authentication can reduce the impact of a compromised password.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Password Lab Section -->
+
+      <section class="content-section" id="page-password">
+        <div class="welcome">
+          <div>
+            <h2>Password lab</h2>
+            <p>Check password characteristics and generate a new random password.</p>
+          </div>
+          <span class="status-pill">Local analysis</span>
+        </div>
+
+        <div class="tool-layout">
+          <div class="tool-card">
+            <h2>Password strength checker</h2>
+            <p class="tool-intro">Your password stays in this page. Avoid entering a password you currently use on a real account.</p>
+            <label class="field-label" for="pw">Password to evaluate</label>
+            <div class="input-row">
+              <input class="field" id="pw" type="password" autocomplete="off" spellcheck="false" placeholder="Enter a test password">
+              <button class="btn secondary" id="eye" type="button">Show</button>
+            </div>
+
+            <div class="meter" id="pwMeter" aria-label="Strength meter">
+              <span></span><span></span><span></span><span></span>
+            </div>
+
+            <div>
+              <span class="result-title" id="pwLabel">Waiting for input</span>
+              <span class="result-meta" id="pwMeta"></span>
+            </div>
+
+            <ul class="flags" id="pwTips" aria-live="polite"></ul>
+            <div style="border-top:1px solid var(--line);margin:22px 0"></div>
+            <h2>Generate a password</h2>
+            <p class="tool-intro">Create a random password using your browser's cryptographic random-number generator.</p>
+            <label class="field-label" for="pwLength">Password length</label>
+            <div class="range-row">
+              <input id="pwLength" type="range" min="12" max="64" value="20">
+              <span class="range-value" id="pwLengthValue">20</span>
+            </div>
+
+            <div class="checkbox-row">
+              <label><input type="checkbox" id="useUpper" checked> Uppercase</label>
+              <label><input type="checkbox" id="useLower" checked> Lowercase</label>
+              <label><input type="checkbox" id="useNumbers" checked> Numbers</label>
+              <label><input type="checkbox" id="useSymbols" checked> Symbols</label>
+            </div>
+
+            <div class="actions">
+              <button class="btn primary" id="generate" type="button">Generate password</button>
+              <button class="btn secondary" id="copyGenerated" type="button">Copy result</button>
+            </div>
+
+            <div class="output-box" id="generated" aria-live="polite"></div>
+            <p class="small-note">Strength indicators are heuristic guidance, not a guarantee. This page does not check passwords against breached-password databases.</p>
+          </div>
+
+          <aside class="help-panel">
+            <h3>How to improve password security</h3>
+            <ul>
+              <li>Prefer long, unique passwords or passphrases.</li>
+              <li>Do not reuse passwords across services.</li>
+              <li>Avoid names, dates, keyboard patterns and predictable substitutions.</li>
+              <li>Use a reputable password manager to store unique credentials.</li>
+              <li>Enable multi-factor authentication where available.</li>
+            </ul>
+            <p>For real accounts, generate and store passwords in a trusted password manager rather than leaving them visible on a shared screen.</p>
+          </aside>
+        </div>
+      </section>
+
+      <!-- Phishing Scanner Section -->
+      <section class="content-section" id="page-phishing">
+        <div class="welcome">
+          <div>
+            <h2>Phishing scanner</h2>
+            <p>Review message content and sender details for common warning signs.</p>
+          </div>
+          <span class="status-pill">Heuristic checks</span>
+        </div>
+
+        <div class="tool-layout">
+          <div class="tool-card">
+            <h2>Inspect a suspicious message</h2>
+            <p class="tool-intro">Paste the message and, if available, the sender address. Do not open links or attachments to test them.</p>
+            <label class="field-label" for="sender">Sender name or email (optional)</label>
+            <input class="field" id="sender" autocomplete="off" placeholder="Example: Account Support &lt;help@example.com&gt;">
+            <label class="field-label" for="message">Message text, including links</label>
+            <textarea class="field" id="message" placeholder="Paste the email, SMS or message here..."></textarea>
+            <div class="actions">
+              <button class="btn primary" id="scan" type="button">Analyze message</button>
+              <button class="btn secondary" id="sample" type="button">Load example</button>
+              <button class="btn danger" id="clearScan" type="button">Clear</button>
+            </div>
+            <div id="phOut" aria-live="polite"></div>
+            <p class="small-note">This is a local pattern-based screening aid. It cannot verify the sender, visit or reputation-check links, inspect attachments, or prove a message is safe.</p>
+          </div>
+
+          <aside class="help-panel">
+            <h3>Warning signs to look for</h3>
+            <ul>
+              <li>Unexpected urgency, threats or pressure to act immediately.</li>
+              <li>Requests for passwords, PINs, OTPs, BVN or payment details.</li>
+              <li>Sender domains that imitate a known organisation.</li>
+              <li>Shortened, misspelled or unusual web addresses.</li>
+              <li>Unexpected attachments or prizes/refunds that seem too good to be true.</li>
+            </ul>
+            <p>When in doubt, open the organisation's official app or type its known web address yourself. Contact the organisation using a trusted number.</p>
+          </aside>
+        </div>
+      </section>
+
+      <!-- 2FA Generator Section -->
+      <section class="content-section" id="page-twofa">
+        <div class="welcome">
+          <div>
+            <h2>2FA generator</h2>
+            <p>Generate time-based one-time passwords using the TOTP standard.</p>
+          </div>
+          <span class="status-pill">RFC 6238 · SHA-1</span>
+        </div>
+
+        <div class="tool-layout">
+          <div class="tool-card">
+            <h2>Authenticator setup</h2>
+            <p class="tool-intro">Create a setup secret for a test account or a service that explicitly supports manual TOTP setup.</p>
+            <label class="field-label" for="issuer">Issuer / service name</label>
+            <input class="field" id="issuer" value="Sentinel Demo" maxlength="50">
+            <label class="field-label" for="account">Account label</label>
+            <input class="field" id="account" value="demo@example.com" maxlength="100">
+            <label class="field-label" for="secret">Base32 secret key</label>
+            <div class="input-row">
+              <input class="field" id="secret" readonly spellcheck="false">
+              <button class="btn secondary" id="newSecret" type="button">New key</button>
+            </div>
+
+            <div class="actions">
+              <button class="btn secondary" id="copySecret" type="button">Copy secret</button>
+              <button class="btn secondary" id="copyUri" type="button">Copy setup URI</button>
+            </div>
+            <label class="field-label">Current one-time code</label>
+            <div class="code" id="currentCode" aria-live="polite">------</div>
+            <div class="progress"><span id="timeBar"></span></div>
+            <p class="result-meta" id="timeLeft" style="text-align:center;margin-top:7px">Waiting for secure browser crypto…</p>
+            <label class="field-label" for="verifyCode">Verify a code</label>
+            <div class="input-row">
+              <input class="field" id="verifyCode" inputmode="numeric" autocomplete="one-time-code" maxlength="6" placeholder="6-digit code">
+              <button class="btn primary" id="verify" type="button">Verify</button>
+            </div>
+            <ul class="flags" id="verifyResult" aria-live="polite"></ul>
+            <p class="small-note">The verification accepts the current 30-second window and one adjacent window on either side to tolerate small clock differences.</p>
+          </div>
+          
+          <aside class="help-panel">
+            <h3>How to add the key to an authenticator</h3>
+            <ol>
+              <li>Generate a new secret key.</li>
+              <li>Copy the setup URI or secret key.</li>
+              <li>In your authenticator app, choose the option to enter a setup key manually.</li>
+              <li>Use time-based (TOTP) mode, then compare the generated codes.</li>
+            </ol>
+            <p><strong>Important:</strong> This demo creates a new secret locally. It does not connect to or enable 2FA on any external account. Never share a real account's setup key or QR code. If this page is hosted publicly, serve it over HTTPS.</p>
+          </aside>
+        </div>
+      </section>
+
+      <footer>Sentinel Security Toolkit · Standalone browser demo · No server connection configured</footer>
+    </main>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="./script.js"></script>
+</body>
+</html>
